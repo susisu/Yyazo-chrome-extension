@@ -1,0 +1,25 @@
+{
+    "manifest_version": 2,
+    "name"            : "Yyazo",
+    "version"         : "0.0.0",
+    "description"     : "",
+    "author"          : "Susisu <susisu2413@yahoo.co.jp> (https://github.com/susisu)",
+    "homepage_url"    : "https://github.com/susisu/Yyazo-chrome-extension",
+    "permissions"     : ["<all_urls>", "*://*/*", "activeTab", "tabs", "webRequest", "webRequestBlocking"],
+    "icons"           : {
+
+    },
+    "browser_action"  : {
+        "default_title": "Yyazo"
+    },
+    "background"      : {
+        "persistent": true,
+        "scripts"   : ["yyazo.js"]
+    },
+    "content_scripts" : [
+        {
+            "matches": ["<all_urls>"],
+            "js"     : ["yyazo_content.js"]
+        }
+    ]
+}
