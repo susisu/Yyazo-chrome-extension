@@ -11,9 +11,13 @@
 
     chrome.browserAction.onClicked.addListener(function (tab) {
         chrome.tabs.sendMessage(tab.id, { action: "getCharacterSet" }, function (charset) {
-            // TODO: send the current (appropriate) character set to the server
-
-            // console.log(charset);
+            var params = "url=" + encodeURIComponent(tab.url) + "&charset=" + encodeURIComponent(charset);
+            var request = new XMLHttpRequest();
+            request.open("POST",
+                settings["server_url"] + "/api/register"
+            );
+            request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            request.send(params);
         });
     });
 
