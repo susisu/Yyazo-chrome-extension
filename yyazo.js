@@ -30,15 +30,20 @@
                     settings["server_url"] + "/api/charset?url=" + encodeURIComponent(details.url),
                     false
                 );
-                request.send(null);
-                if (request.status === 200) {
-                    var charset = request.responseText;
-                    if (header.value.toLowerCase().indexOf("charset=") >= 0) {
-                        header.value = header.value.replace(/charset\=[^\s;]+/, "charset=" + charset)
+                try {
+                    request.send(null);
+                    if (request.status === 200) {
+                        var charset = request.responseText;
+                        if (header.value.toLowerCase().indexOf("charset=") >= 0) {
+                            header.value = header.value.replace(/charset\=[^\s;]+/, "charset=" + charset)
+                        }
+                        else {
+                            header.value = header.value + "; charset=" + charset;
+                        }
                     }
-                    else {
-                        header.value = header.value + "; charset=" + charset;
-                    }
+                }
+                catch (error) {
+                    // ignore
                 }
                 break;
             }
